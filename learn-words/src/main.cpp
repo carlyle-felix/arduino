@@ -1,4 +1,4 @@
-/***************************** Spelling Quiz ***********************************
+/******************************* Learn Words ***********************************
  *                                                                             *
  * Intentionally easy quiz to help kid sound out words and type them depending *
  * on the number associated with the word. Correct answers triggers a window   *
