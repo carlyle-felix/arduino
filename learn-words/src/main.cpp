@@ -8,6 +8,8 @@
 
 #include <Arduino.h>
 
+#define DURATION 20000
+
 // Randomize order (comment out for ordered)
 #define RANDOM
 
@@ -52,10 +54,10 @@ const char *wordList[] = {"pup",
 // Globals
 const uint8_t answerBuzzer = 2;
 const uint8_t answerRed = 3;
-const uint8_t answerGreen = 4;
-const uint8_t red = 8;
-const uint8_t green = 9;
-const uint8_t blue = 10;
+const uint8_t answerGreen = 5;
+const uint8_t red = 9;
+const uint8_t green = 10;
+const uint8_t blue = 11;
 const uint8_t button = 13;
 
 // Prototypes
@@ -200,21 +202,17 @@ void set_colour(const uint8_t r, const uint8_t g, const uint8_t b)
 void enableRGB(void)
 {
   uint8_t colour = -1;
-  uint32_t start, duration;
+  uint32_t start;
 
   // Duration
   start = millis();
-  duration = 10000;
 
   // Button logic
-  while (millis() < (start + duration)) {
-    if (digitalRead(button)) {
-      colour++;
-      delay(30);
-    } else {
-      set_colour(0, 0, 0);
-      continue;
-    }
+  // wait for button
+  while (!digitalRead(button));
+  while (millis() < (start + DURATION)) {
+    colour++;
+    delay(30);
 
 #ifdef UNICORN
     if (colour > 2) {
